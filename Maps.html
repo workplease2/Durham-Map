@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durham Parks Lead Contamination Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #0056b3;
+        }
+        h2 {
+            color: #0056b3;
+        }
+        p {
+            font-size: 1.2em;
+        }
+        #map {
+            height: 600px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0056b3;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #004494;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, Durham Resident</h1>
+        <h2>Welcome to the Park Explorer!</h2>
+        <p>Discover parks near you and learn about their safety features. Search for parks in your area to view reported lead levels, safety tips, and recommendations for a worry-free visit. Stay informed and enjoy your outdoor adventures with peace of mind!</p>
+        <div id="map"></div>
+        <a href="work website.html" class="button">Go Back to Home</a>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([36.0014, -78.9382], 12);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add markers for parks with lead contamination
+        var parks = [
+            { name: "East Durham Park", coords: [35.9876, -78.8998] },
+            { name: "East End Park", coords: [35.9912, -78.8954] },
+            { name: "Lyon Park", coords: [35.9918, -78.9172] },
+            { name: "Northgate Park", coords: [36.0156, -78.9054] },
+            { name: "Walltown Park", coords: [36.0150, -78.9240] }
+        ];
+
+        parks.forEach(function(park) {
+            L.marker(park.coords).addTo(map)
+                .bindPopup('<b>' + park.name + '</b><br>Lead contamination detected.');
+        });
+    </script>
+</body>
+</html>
